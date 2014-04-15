@@ -1364,10 +1364,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-(function Imgbone_IIFE(global) {
+(function Imagebone_IIFE(global) {
   'use strict';
 
-  global.Imagebone = global.Imgbone = require('./lib/main.js');
+  global.Imagebone = require('./lib/main.js');
 
 }(window));
 

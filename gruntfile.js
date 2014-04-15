@@ -12,7 +12,7 @@ module.exports = function (grunt) {
     browserify: {
       dist: {
         files: {
-          'build/imgbone.js': ['src/build.js'],
+          'build/imagebone.js': ['src/build.js'],
         }
       }
     },
@@ -20,10 +20,10 @@ module.exports = function (grunt) {
       dist: {
         options: {
           sourceMap: true,
-          sourceMapName: 'build/imgbone.map'
+          sourceMapName: 'build/imagebone.map'
         },
         files: {
-          'build/imgbone.min.js': ['build/imgbone.js']
+          'build/imagebone.min.js': ['build/imagebone.js']
         }
       }
     }
@@ -36,6 +36,6 @@ module.exports = function (grunt) {
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'browserify']);
-  grunt.registerTask('production', ['jshint', 'browserify', 'uglify']);
+  grunt.registerTask('release', ['jshint', 'browserify', 'uglify']);
 
 };

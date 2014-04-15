@@ -1,14 +1,14 @@
 {
-  "name": "imgbone",
+  "name": "Imagebone",
   "version": "0.0.0",
   "description": "In place image manipulation",
-  "main": "src/imgbone.js",
+  "main": "src/build.js",
   "scripts": {
     "test": "grunt"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:KorvinSzanto/imgbone.git"
+    "url": "git@github.com:KorvinSzanto/imagebone.git"
   },
   "keywords": [
     "Image",
@@ -17,9 +17,9 @@
   "author": "Korvin Szanto (korvinszanto@gmail.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/KorvinSzanto/imgbone/issues"
+    "url": "https://github.com/KorvinSzanto/imagebone/issues"
   },
-  "homepage": "https://github.com/KorvinSzanto/imgbone",
+  "homepage": "https://github.com/KorvinSzanto/imagebone",
   "dependencies": {
     "browserify": "^3.41.0",
     "grunt": "^0.4.4",
