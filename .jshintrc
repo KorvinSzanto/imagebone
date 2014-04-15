@@ -1,0 +1,41 @@
+{
+  "maxerr"     : 100,
+
+  "predef"    : [ "_", "Imagebone" ],
+
+  // API's
+  "browser"    : true,
+  "node"       : true,
+
+  // Development.
+  "debug"      : true,
+  "devel"      : true,
+
+  // The Good Parts.
+  "strict"     : false,
+  "bitwise"    : true,
+  "boss"       : false,
+  "curly"      : true,
+  "eqeqeq"     : true,
+  "eqnull"     : false,
+  "evil"       : false,
+  "expr"       : false,
+  "forin"      : false,
+  "immed"      : true,
+  "latedef"    : true,
+  "loopfunc"   : false,
+  "noarg"      : true,
+  "regexp"     : true,
+  "regexdash"  : false,
+  "scripturl"  : false,
+  "shadow"     : false,
+  "supernew"   : false,
+  "undef"      : true,
+
+  // Personal styling preferences.
+  "newcap"     : true,
+  "noempty"    : true,
+  "nonew"      : true,
+  "trailing"   : true,
+  "indent"     : 2
+}
