@@ -304,6 +304,12 @@ module.exports = (function Canvas() {
             width: this.getWidth(),
             height: this.getHeight()
           };
+          if (this.getOffset().x + this.getWidth() > this.getCanvasWidth()) {
+            butter_zone.width = this.getCanvasWidth() - this.getOffset().x;
+          }
+          if (this.getOffset().y + this.getHeight() > this.getCanvasHeight()) {
+            butter_zone.height = this.getCanvasHeight() - this.getOffset().y;
+          }
 
           if (e.pageX > butter_zone.x && e.pageX < butter_zone.x + butter_zone.width &&
               e.pageY > butter_zone.y && e.pageY < butter_zone.y + butter_zone.height) {
@@ -349,7 +355,6 @@ module.exports = (function Canvas() {
         this.set('drag_start', { x: e.pageX, y: e.pageY });
         this.set('size_start', { width: this.getCanvasWidth(), height: this.getCanvasHeight() });
 
-
         this.getCanvas().style.cursor = '';
         this.getCanvas().style.cursor = 'grabbing';
         if (!this.getCanvas().style.cursor) {
@@ -360,7 +365,7 @@ module.exports = (function Canvas() {
       return this;
     },
 
-    handleMouseUp: function(e) {
+    handleMouseUp: function() {
       this.set('image_dragging', false);
       this.set('dragger_dragging', false);
 

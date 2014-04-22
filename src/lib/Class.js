@@ -5,7 +5,7 @@ module.exports = function Class() {
   };
   this.set = function(key, value) {
     attr[key] = value;
-    var split = require('underscore')(key.split('_')).map(function(value) {
+    var split = key.split('_').map(function(value) {
       return value.substr(0, 1).toUpperCase() + value.toLowerCase().substr(1);
     });
     var fn = 'get' + split.join('');
