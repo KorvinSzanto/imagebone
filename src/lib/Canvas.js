@@ -334,15 +334,27 @@ module.exports = (function Canvas() {
     handleMouseDown: function(e) {
       this.normalizeEvent(e);
 
-      debugger;
       if (this.getImageHovered()) {
         this.set('image_dragging', true);
         this.set('drag_start', { x: e.pageX, y: e.pageY });
         this.set('offset_start', { x: this.getOffset().x, y: this.getOffset().y });
+
+        this.getCanvas().style.cursor = '';
+        this.getCanvas().style.cursor = 'grabbing';
+        if (!this.getCanvas().style.cursor) {
+          this.getCanvas().style.cursor = '-webkit-grabbing';
+        }
       } else if (this.getDraggerHovered()) {
         this.set('dragger_dragging', true);
         this.set('drag_start', { x: e.pageX, y: e.pageY });
         this.set('size_start', { width: this.getCanvasWidth(), height: this.getCanvasHeight() });
+
+
+        this.getCanvas().style.cursor = '';
+        this.getCanvas().style.cursor = 'grabbing';
+        if (!this.getCanvas().style.cursor) {
+          this.getCanvas().style.cursor = '-webkit-grabbing';
+        }
       }
 
       return this;
@@ -351,6 +363,12 @@ module.exports = (function Canvas() {
     handleMouseUp: function(e) {
       this.set('image_dragging', false);
       this.set('dragger_dragging', false);
+
+      this.getCanvas().style.cursor = '';
+      this.getCanvas().style.cursor = 'grab';
+      if (!this.getCanvas().style.cursor) {
+        this.getCanvas().style.cursor = '-webkit-grab';
+      }
       return this;
     }
 
