@@ -650,7 +650,8 @@ module.exports = function Extend(protoProps, staticProps) {
 
 },{}],6:[function(require,module,exports){
 module.exports = function Imagebone(img, width, height) {
-  if (img instanceof Array || img instanceof window.HTMLCollection) {
+  if (Object.prototype.toString.call(img) === '[object Array]' ||
+      Object.prototype.toString.call(img) === '[object HTMLCollection]') {
     var imagebones = [];
     Array.prototype.map.call(img, function(img) {
       imagebones.push(new Imagebone(img, width, height));
@@ -668,6 +669,14 @@ module.exports = function Imagebone(img, width, height) {
 
   var Canvas = require('./Canvas.js');
   this.canvas = new Canvas(img, width, height);
+};
+module.exports.prototype.resize = function(x, y) {
+  if (x === Object(x)) {
+    x = x.x;
+    y = x.y;
+  }
+  this.canvas.resizeCanvas(x, y).renderSize().render();
+  return this;
 };
 
 },{"./Canvas.js":2}]},{},[1])
