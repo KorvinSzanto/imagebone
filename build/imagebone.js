@@ -650,8 +650,10 @@ module.exports = function Extend(protoProps, staticProps) {
 
 },{}],6:[function(require,module,exports){
 module.exports = function Imagebone(img, width, height) {
+
   if (Object.prototype.toString.call(img) === '[object Array]' ||
-      Object.prototype.toString.call(img) === '[object HTMLCollection]') {
+      Object.prototype.toString.call(img) === '[object HTMLCollection]' ||
+      Object.prototype.toString.call(img) === '[object NodeList]') {
     var imagebones = [];
     Array.prototype.map.call(img, function(img) {
       imagebones.push(new Imagebone(img, width, height));
