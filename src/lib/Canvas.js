@@ -260,6 +260,10 @@ module.exports = (function Canvas() {
       var old_width = this.getCanvasWidth(),
           old_height = this.getCanvasHeight();
 
+      width = Math.max(width, 1);
+      height = Math.max(height, 1);
+
+
       this.getOffset().x -= (old_width - width) / 2;
       this.getOffset().y -= (old_height - height) / 2;
 
