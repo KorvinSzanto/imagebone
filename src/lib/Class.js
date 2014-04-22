@@ -9,10 +9,15 @@ module.exports = function Class() {
       return value.substr(0, 1).toUpperCase() + value.toLowerCase().substr(1);
     });
     var fn = 'get' + split.join('');
-    console.log(fn);
     if (typeof this[fn] === 'undefined') {
       this[fn] = function() {
         return this.get(key);
+      };
+    }
+    fn = 'set' + split.join('');
+    if (typeof this[fn] === 'undefined') {
+      this[fn] = function(value) {
+        return this.set(key, value);
       };
     }
     return this;
