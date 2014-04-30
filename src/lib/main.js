@@ -1,16 +1,5 @@
 module.exports = function Imagebone(img, width, height) {
-
-  if (Object.prototype.toString.call(img) === '[object Array]' ||
-      Object.prototype.toString.call(img) === '[object HTMLCollection]' ||
-      Object.prototype.toString.call(img) === '[object NodeList]') {
-    var imagebones = [];
-    Array.prototype.map.call(img, function(img) {
-      imagebones.push(new Imagebone(img, width, height));
-    });
-
-    return imagebones;
-  }
-  if (this === undefined || !(this instanceof Imagebone)) {
+  if (this === window || !(this instanceof Imagebone)) {
     return new Imagebone(img, width, height);
   }
 
@@ -21,6 +10,7 @@ module.exports = function Imagebone(img, width, height) {
   var Canvas = require('./Canvas.js');
   this.canvas = new Canvas(img, width, height);
 };
+
 module.exports.prototype.resize = function(x, y) {
   if (x === Object(x)) {
     x = x.x;

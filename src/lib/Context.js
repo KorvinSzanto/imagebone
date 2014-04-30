@@ -1,4 +1,7 @@
 module.exports = (function Context() {
+
+
+
   return require('./Class.js').extend({
 
     init: function(context) {
@@ -101,6 +104,11 @@ module.exports = (function Context() {
       return this.applyToContext('strokeText', [text].concat(args));
     },
 
+    fillStrokeText: function() {
+      var args = Array.prototype.slice.call(arguments);
+      return this.strokeText.apply(this, args).fillText.apply(this, args);
+    },
+
     fillRect: function(x, y, width, height) {
       var args = Array.prototype.slice.call(arguments);
 
@@ -110,6 +118,33 @@ module.exports = (function Context() {
       height = this.scale(args.shift());
 
       return this.applyToContext('fillRect', [x, y, width, height]);
+    },
+
+    strokeRect: function(x, y, width, height) {
+      var args = Array.prototype.slice.call(arguments);
+
+      x = this.scale(args.shift());
+      y = this.scale(args.shift());
+      width = this.scale(args.shift());
+      height = this.scale(args.shift());
+
+      return this.applyToContext('strokeRect', [x, y, width, height]);
+    },
+
+    fillStrokeRect: function() {
+      var args = Array.prototype.slice.call(arguments);
+      return this.strokeRect.apply(this, args).fillRect.apply(this, args);
+    },
+
+    clearRect: function(x, y, width, height) {
+      var args = Array.prototype.slice.call(arguments);
+
+      x = this.scale(args.shift());
+      y = this.scale(args.shift());
+      width = this.scale(args.shift());
+      height = this.scale(args.shift());
+
+      return this.applyToContext('clearRect', [x, y, width, height]);
     },
 
     drawImage: function() {

@@ -100,7 +100,7 @@ module.exports = (function Canvas() {
       });
 
       this.getGivenImage().parentNode.replaceChild(this.getCanvas(), this.getGivenImage());
-      return this.renderSize().render();
+      return this.renderSize().draw();
     },
 
     renderSize: function() {
@@ -128,12 +128,12 @@ module.exports = (function Canvas() {
       return this;
     },
 
-    render: function() {
+    draw: function() {
       return this.clearCanvas().drawBackground().drawImage().drawForeground();
     },
 
     redraw: function() {
-      return this.renderSize().render();
+      return this.renderSize().draw();
     },
 
     /**
@@ -187,13 +187,12 @@ module.exports = (function Canvas() {
     drawForeground: function() {
       var ctx = this.getContext();
 
-      ctx.setFillColor('white')
-        .fillRect(
+      ctx.clearRect(
           this.getCanvasWidth(),
           0,
           this.getPadding() * 6,
           this.getCanvasHeight() + this.getPadding() * 6)
-        .fillRect(
+        .clearRect(
           0,
           this.getCanvasHeight(),
           this.getCanvasWidth() + this.getPadding() * 6,
@@ -227,6 +226,10 @@ module.exports = (function Canvas() {
         .addMove(0, -this.getPadding())
         .addLine(0, this.getPadding() * 2)
         .stroke()
+
+        .fillRect(width_text,
+          this.getCanvasWidth() / 2,
+          this.getCanvasHeight() + this.getPadding() * 2)
         .fillText(width_text,
           this.getCanvasWidth() / 2,
           this.getCanvasHeight() + this.getPadding() * 2);
@@ -362,12 +365,12 @@ module.exports = (function Canvas() {
           x: this.getOffsetStart().x + e.pageX - this.getDragStart().x,
           y: this.getOffsetStart().y + e.pageY - this.getDragStart().y
         });
-        this.render();
+        this.draw();
       } else if (this.getDraggerDragging()) {
         this.resizeCanvas(
           this.getSizeStart().width + e.pageX - this.getDragStart().x,
           this.getSizeStart().height + e.pageY - this.getDragStart().y);
-        this.renderSize().render();
+        this.renderSize().draw();
       }
     },
 
@@ -448,6 +451,9 @@ module.exports.extend = require('./extend.js');
 
 },{"./extend.js":5}],4:[function(require,module,exports){
 module.exports = (function Context() {
+
+
+
   return require('./Class.js').extend({
 
     init: function(context) {
@@ -550,6 +556,11 @@ module.exports = (function Context() {
       return this.applyToContext('strokeText', [text].concat(args));
     },
 
+    fillStrokeText: function() {
+      var args = Array.prototype.slice.call(arguments);
+      return this.strokeText.apply(this, args).fillText.apply(this, args);
+    },
+
     fillRect: function(x, y, width, height) {
       var args = Array.prototype.slice.call(arguments);
 
@@ -559,6 +570,33 @@ module.exports = (function Context() {
       height = this.scale(args.shift());
 
       return this.applyToContext('fillRect', [x, y, width, height]);
+    },
+
+    strokeRect: function(x, y, width, height) {
+      var args = Array.prototype.slice.call(arguments);
+
+      x = this.scale(args.shift());
+      y = this.scale(args.shift());
+      width = this.scale(args.shift());
+      height = this.scale(args.shift());
+
+      return this.applyToContext('strokeRect', [x, y, width, height]);
+    },
+
+    fillStrokeRect: function() {
+      var args = Array.prototype.slice.call(arguments);
+      return this.strokeRect.apply(this, args).fillRect.apply(this, args);
+    },
+
+    clearRect: function(x, y, width, height) {
+      var args = Array.prototype.slice.call(arguments);
+
+      x = this.scale(args.shift());
+      y = this.scale(args.shift());
+      width = this.scale(args.shift());
+      height = this.scale(args.shift());
+
+      return this.applyToContext('clearRect', [x, y, width, height]);
     },
 
     drawImage: function() {
@@ -650,18 +688,7 @@ module.exports = function Extend(protoProps, staticProps) {
 
 },{}],6:[function(require,module,exports){
 module.exports = function Imagebone(img, width, height) {
-
-  if (Object.prototype.toString.call(img) === '[object Array]' ||
-      Object.prototype.toString.call(img) === '[object HTMLCollection]' ||
-      Object.prototype.toString.call(img) === '[object NodeList]') {
-    var imagebones = [];
-    Array.prototype.map.call(img, function(img) {
-      imagebones.push(new Imagebone(img, width, height));
-    });
-
-    return imagebones;
-  }
-  if (this === undefined || !(this instanceof Imagebone)) {
+  if (this === window || !(this instanceof Imagebone)) {
     return new Imagebone(img, width, height);
   }
 
@@ -672,12 +699,13 @@ module.exports = function Imagebone(img, width, height) {
   var Canvas = require('./Canvas.js');
   this.canvas = new Canvas(img, width, height);
 };
+
 module.exports.prototype.resize = function(x, y) {
   if (x === Object(x)) {
     x = x.x;
     y = x.y;
   }
-  this.canvas.resizeCanvas(x, y).renderSize().render();
+  this.canvas.resizeCanvas(x, y).redraw();
   return this;
 };
 

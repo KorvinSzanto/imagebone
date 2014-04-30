@@ -157,13 +157,12 @@ module.exports = (function Canvas() {
     drawForeground: function() {
       var ctx = this.getContext();
 
-      ctx.setFillColor('white')
-        .fillRect(
+      ctx.clearRect(
           this.getCanvasWidth(),
           0,
           this.getPadding() * 6,
           this.getCanvasHeight() + this.getPadding() * 6)
-        .fillRect(
+        .clearRect(
           0,
           this.getCanvasHeight(),
           this.getCanvasWidth() + this.getPadding() * 6,
