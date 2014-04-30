@@ -26,6 +26,6 @@ module.exports.prototype.resize = function(x, y) {
     x = x.x;
     y = x.y;
   }
-  this.canvas.resizeCanvas(x, y).renderSize().render();
+  this.canvas.resizeCanvas(x, y).redraw();
   return this;
 };

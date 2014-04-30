@@ -70,7 +70,7 @@ module.exports = (function Canvas() {
       });
 
       this.getGivenImage().parentNode.replaceChild(this.getCanvas(), this.getGivenImage());
-      return this.renderSize().render();
+      return this.renderSize().draw();
     },
 
     renderSize: function() {
@@ -98,12 +98,12 @@ module.exports = (function Canvas() {
       return this;
     },
 
-    render: function() {
+    draw: function() {
       return this.clearCanvas().drawBackground().drawImage().drawForeground();
     },
 
     redraw: function() {
-      return this.renderSize().render();
+      return this.renderSize().draw();
     },
 
     /**
@@ -332,12 +332,12 @@ module.exports = (function Canvas() {
           x: this.getOffsetStart().x + e.pageX - this.getDragStart().x,
           y: this.getOffsetStart().y + e.pageY - this.getDragStart().y
         });
-        this.render();
+        this.draw();
       } else if (this.getDraggerDragging()) {
         this.resizeCanvas(
           this.getSizeStart().width + e.pageX - this.getDragStart().x,
           this.getSizeStart().height + e.pageY - this.getDragStart().y);
-        this.renderSize().render();
+        this.renderSize().draw();
       }
     },
 
